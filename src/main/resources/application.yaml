@@ -1,0 +1,9 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/collatz
+        username: user
+        password: letmein
+    flyway:
+        enabled: true
+
+

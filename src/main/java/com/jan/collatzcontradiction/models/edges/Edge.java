@@ -1,12 +1,12 @@
 package com.jan.collatzcontradiction.models.edges;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,8 +15,8 @@ import java.math.BigInteger;
 @Table(name="EDGES")
 public class Edge {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
     @Column(name="input")
     private BigInteger input;
     @Column(name="output")

@@ -1,0 +1,15 @@
+version: '3'
+volumes:
+  collatz-data:
+services:
+  collatz-db:
+    image: "postgres:14.2"
+    restart: on-failure
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'letmein'
+      POSTGRES_DB: 'collatz'
+    ports:
+      - "5432:5432"
+    volumes:
+      - collatz-data:/var/lib/postgresql/data

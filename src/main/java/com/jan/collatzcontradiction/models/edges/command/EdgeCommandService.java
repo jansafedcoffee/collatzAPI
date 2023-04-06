@@ -35,6 +35,6 @@ public class EdgeCommandService {
     }
 
     private boolean checkIfEven(final BigInteger input) {
-        return input.divide(BigInteger.valueOf(2)).equals(BigInteger.valueOf(0));
+        return input.mod(BigInteger.valueOf(2)).equals(BigInteger.valueOf(0));
     }
 }
