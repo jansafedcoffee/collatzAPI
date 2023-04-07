@@ -16,7 +16,11 @@ public class EdgeQueryService {
         this.edgeRepository = edgeRepository;
     }
 
-    public List<Edge> getEdges() {
-        return edgeRepository.findAll();
+    public List<Edge> getAllEdges() {
+        return edgeRepository.findAllSorted();
+    }
+
+    public List<Edge> getByDepth(final Integer from, final Integer to) {
+        return edgeRepository.findEdgesByDepthBetween(from, to);
     }
 }

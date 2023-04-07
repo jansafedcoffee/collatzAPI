@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/edge")
@@ -16,10 +18,8 @@ public class EdgeCommandController {
     private final EdgeCommandService service;
 
     @PostMapping()
-    public Edge postEdge(@RequestBody EdgeCreateDTO dto) {
-
+    public Edge postEdge(@RequestBody final EdgeCreateDTO dto) {
         return service.postEdge(dto);
     }
-
 
 }

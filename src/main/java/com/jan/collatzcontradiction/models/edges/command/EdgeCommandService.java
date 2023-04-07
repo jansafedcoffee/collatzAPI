@@ -3,11 +3,13 @@ package com.jan.collatzcontradiction.models.edges.command;
 import com.jan.collatzcontradiction.models.edges.Edge;
 import com.jan.collatzcontradiction.models.edges.EdgeRepository;
 import com.jan.collatzcontradiction.models.edges.dto.EdgeCreateDTO;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -16,25 +18,31 @@ public class EdgeCommandService {
 
     private final EdgeRepository edgeRepository;
 
-    public Edge postEdge(EdgeCreateDTO dto) {
-        return edgeRepository.save(createEdge(dto.getInput()));
+    public Edge postEdge(final EdgeCreateDTO dto) {
+        return calculateAndSaveEdge(dto.getInput());
     }
+    private Edge calculateAndSaveEdge(BigInteger n) {
+        Map<BigInteger, Integer> depth = new HashMap<>();
+        depth.put(BigInteger.ONE, 0);
 
-    private Edge createEdge(final BigInteger input) {
-        final var edge = new Edge();
-        edge.setInput(input);
-        edge.setOutput(calculateOutput(input));
-        return edge;
-    }
-
-    private BigInteger calculateOutput(final BigInteger input) {
-        if(checkIfEven(input)) {
-            return input.divide(BigInteger.valueOf(2));
+        BigInteger input = n;
+        int inputDepth = 0; // start at -1 to account for the initial input
+        while (!depth.containsKey(input)) {
+            inputDepth++;
+            depth.put(input, inputDepth);
+            input = input.mod(BigInteger.TWO).equals(BigInteger.ZERO) ? input.divide(BigInteger.TWO) : input.multiply(BigInteger.valueOf(3)).add(BigInteger.ONE);
         }
-        return input.multiply(BigInteger.valueOf(3)).add(BigInteger.valueOf(1));
-    }
+        inputDepth += depth.get(input);
 
-    private boolean checkIfEven(final BigInteger input) {
-        return input.mod(BigInteger.valueOf(2)).equals(BigInteger.valueOf(0));
+        List<Edge> edgesWithDepth = edgeRepository.findByDepth(inputDepth);
+        for (Edge edge : edgesWithDepth) {
+            if (edge.getInput().equals(n)) {
+                return null; // If the edge already exists, return immediately
+            }
+        }
+
+        BigInteger output = n.mod(BigInteger.TWO).equals(BigInteger.ZERO) ? n.divide(BigInteger.TWO) : n.multiply(BigInteger.valueOf(3)).add(BigInteger.ONE);
+        Edge edge = new Edge(n, output, inputDepth);
+        return edgeRepository.save(edge);
     }
 }

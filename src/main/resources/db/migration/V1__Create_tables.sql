@@ -1,6 +1,5 @@
 CREATE TABLE EDGES (
-                       id UUID PRIMARY KEY,
-                       input NUMERIC(1000),
+                       input NUMERIC(1000) PRIMARY KEY ,
                        output NUMERIC(1000),
                        depth INTEGER
 );
