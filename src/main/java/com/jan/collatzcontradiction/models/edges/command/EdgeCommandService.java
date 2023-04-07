@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class EdgeCommandService {
     public Edge postEdge(final EdgeCreateDTO dto) {
         return calculateAndSaveEdge(dto.getInput());
     }
+
     private Edge calculateAndSaveEdge(BigInteger n) {
         Map<BigInteger, Integer> depth = new HashMap<>();
         depth.put(BigInteger.ONE, 0);

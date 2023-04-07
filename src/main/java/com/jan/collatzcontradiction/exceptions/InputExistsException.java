@@ -15,7 +15,7 @@ public class InputExistsException extends ErrorResponseException {
     }
 
     private static ProblemDetail buildProblem(final BigInteger input) {
-        ProblemDetail problem =ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, String.valueOf(input));
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, String.valueOf(input));
         problem.setType(URI.create("/input-exists"));
         problem.setTitle("Number already exists: " + input.toString());
         problem.setProperty("timestamp", Instant.now());

@@ -11,6 +11,7 @@ import java.util.List;
 public class EdgeQueryService {
 
     private final EdgeRepository edgeRepository;
+
     @Autowired
     public EdgeQueryService(EdgeRepository edgeRepository) {
         this.edgeRepository = edgeRepository;
