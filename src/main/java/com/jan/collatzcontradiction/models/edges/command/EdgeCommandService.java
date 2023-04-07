@@ -26,7 +26,7 @@ public class EdgeCommandService {
         depth.put(BigInteger.ONE, 0);
 
         BigInteger input = n;
-        int inputDepth = 0; // start at -1 to account for the initial input
+        int inputDepth = 0;
         while (!depth.containsKey(input)) {
             inputDepth++;
             depth.put(input, inputDepth);
