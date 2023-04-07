@@ -54,7 +54,7 @@ Once you have these prerequisites, follow these steps:
 
 ## Using the Service
 
-To use my CollatzAPI, you can use the following endpoints:
+To use CollatzAPI, you can use the following endpoints:
 
 ## EdgeQueryController
 
