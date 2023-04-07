@@ -56,7 +56,67 @@ Once you have these prerequisites, follow these steps:
 
 To use my CollatzAPI, you can use the following endpoints:
 
-[//]: # (TODO: Add endpoints here)
+## EdgeQueryController
+
+This class contains endpoints related to retrieving edges from the system.
+
+### `GET /edges`
+
+Retrieves all edges from the system.
+
+#### Request
+
+GET /edges
+
+#### Response
+
+Returns a list of `Edge` objects, representing all edges in the system.
+
+### `GET /edges/depth`
+
+Retrieves all edges that connect nodes between a specified depth range.
+
+#### Request
+GET /edges/depth?from={from}&to={to}
+
+**Parameters:**
+
+- `from` (required): the starting depth of the range (an integer).
+- `to` (required): the ending depth of the range (an integer).
+
+#### Response
+
+Returns a list of `Edge` objects, representing all edges that connect nodes between the specified depth range.
+
+
+## EdgeCommandController
+
+This class contains endpoints related to creating edges in the system.
+
+### `POST /edge`
+
+Creates a new edge in the system.
+
+#### Request
+
+**Body:**
+
+A JSON object representing the edge to be created, in the following format:
+
+``
+{
+"input": naturalNumber
+}``
+
+**Properties:**
+
+- `input` (required): the input value of the new edge (a `BigInteger`).
+
+#### Response
+
+Returns the newly created `Edge` object.
+
+
 
 ## License
 

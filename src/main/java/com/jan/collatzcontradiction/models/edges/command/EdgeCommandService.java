@@ -1,9 +1,9 @@
 package com.jan.collatzcontradiction.models.edges.command;
 
+import com.jan.collatzcontradiction.exceptions.InputExistsException;
 import com.jan.collatzcontradiction.models.edges.Edge;
 import com.jan.collatzcontradiction.models.edges.EdgeRepository;
 import com.jan.collatzcontradiction.models.edges.dto.EdgeCreateDTO;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class EdgeCommandService {
         List<Edge> edgesWithDepth = edgeRepository.findByDepth(inputDepth);
         for (Edge edge : edgesWithDepth) {
             if (edge.getInput().equals(n)) {
-                return null; // If the edge already exists, return immediately
+                throw new InputExistsException(edge.getInput());
             }
         }
 
