@@ -25,7 +25,7 @@ Once you have these prerequisites, follow these steps:
 1. Clone the repository from GitHub using the following command:
 
     ```
-    https://github.com/jansafedcoffee/collatz-graph-service.git
+    https://github.com/jansafedcoffee/collatzAPI.git
     ```
 
 2. Change into the project directory using the following command:
